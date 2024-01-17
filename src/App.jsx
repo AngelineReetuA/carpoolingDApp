@@ -81,6 +81,18 @@ function Connection() {
   const [isConnected, setIsConnected] = useState(false);
   const [account, setAccount] = useState("");
 
+  useEffect(() => {
+    if (window.ethereum) {
+      ethereum.request({ method: "eth_accounts" }).then((accounts)=>{
+        if (accounts.length > 0) {
+          const account = accounts[0];
+          setAccount(account);
+          setIsConnected(true);
+        }
+      })
+    }
+  }, []);
+
   const detectCurrentProvider = () => {
     let provider;
     if (window.ethereum) {
