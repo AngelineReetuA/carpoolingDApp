@@ -1,6 +1,8 @@
 import React from 'react'
 import {useParams} from 'react-router-dom'
 import { Header } from '../components/Header'
+import { ProfileNavBar } from '../components/ProfileNavBar'
+import { RideTable } from '../components/RideTable'
 
 export function Profile() {
     const accountParam = useParams()
@@ -8,8 +10,9 @@ export function Profile() {
     console.log(account);
   return (
     <>
-        <Header/>
-        Hi, User Account {account}... !!
+        <Header/><br/><br/>
+        <ProfileNavBar/><br/>
+        <RideTable/>
     </>
   )
 }
