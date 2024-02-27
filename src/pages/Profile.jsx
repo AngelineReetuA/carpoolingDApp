@@ -1,6 +1,7 @@
 import React from 'react'
 import {useParams} from 'react-router-dom'
 import { Header } from '../components/Header'
+import { Registration } from "../components/Registration"
 import { ProfileNavBar } from '../components/ProfileNavBar'
 import { RideTable } from '../components/RideTable'
 
@@ -10,9 +11,8 @@ export function Profile() {
     console.log(account);
   return (
     <>
-        <Header/><br/><br/>
-        <ProfileNavBar/><br/>
-        <RideTable/>
+        <Header/><br/>
+        <Registration/>
     </>
   )
 }

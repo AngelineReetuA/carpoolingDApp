@@ -7,24 +7,25 @@ import { CarLoader } from "./Loader";
 
 export function Connection() {
   const [isConnected, setIsConnected] = useState(false);
+  const [noProviders, setNoProviders] = useState();
   const [account, setAccount] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const navigateToProfile = (account) => {
-    console.log("account "+account)
-    setTimeout(()=>navigate(`/profile/${account}`),2000)
-  }
-  useEffect(() => {
-    if (window.ethereum) {
-      ethereum.request({ method: "eth_accounts" }).then((accounts) => {
-        if (accounts.length > 0) {
-          const account = accounts[0];
-          setAccount(account);
-          setIsConnected(true);
-          navigateToProfile(account)
-        }
-      });
-    }
-  }, []);
+    console.log("account " + account);
+    setTimeout(() => navigate(`/profile/${account}`), 2000);
+  };
+  // useEffect(() => {
+  //   if (window.ethereum) {
+  //     ethereum.request({ method: "eth_accounts" }).then((accounts) => {
+  //       if (accounts.length > 0) {
+  //         const account = accounts[0];
+  //         setAccount(account);
+  //         setIsConnected(true);
+  //         navigateToProfile(account)
+  //       }
+  //     });
+  //   }
+  // }, []);
 
   const detectCurrentProvider = () => {
     let provider;
@@ -34,6 +35,7 @@ export function Connection() {
       provider = window.web3.currentProvider;
     } else {
       console.log("No providers detected");
+      setNoProviders(true);
     }
     return provider;
   };
@@ -48,7 +50,10 @@ export function Connection() {
         const account = userAcc[0];
         setAccount(account);
         setIsConnected(true);
-        navigateToProfile(account)
+        setNoProviders(false);
+        navigateToProfile(account);
+      } else {
+        setNoProviders(true);
       }
     } catch (err) {
       console.log("Error" + err);
@@ -59,7 +64,6 @@ export function Connection() {
     setIsConnected(false);
   };
 
- 
   return (
     <>
       <div>
@@ -93,6 +97,16 @@ export function Connection() {
             </center>
             <br />
             <br />
+          </>
+        )}
+        <br/><br/>
+        {noProviders && (
+          <>
+            <center>
+              <div className="errorMessage">
+                No providers detected.. Please install Metamask and try again.
+              </div>
+            </center>
           </>
         )}
       </div>

@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export function ProfileNavBar() {
+  const navigate = useNavigate()
   function disconnect  () {
-    const navigate = useNavigate()
     navigate(`/`);
   };
   return (
@@ -13,6 +14,7 @@ export function ProfileNavBar() {
           Disconnect
         </button>
         <button className="button">Post a ride</button>
+        <button className="button">Profile</button>
       </div>
     </>
   );
