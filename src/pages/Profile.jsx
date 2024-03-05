@@ -11,7 +11,7 @@ export function Profile() {
     console.log(account);
   return (
     <>
-        <Header/><br/>
+        <Header/>
         <Registration/>
     </>
   )

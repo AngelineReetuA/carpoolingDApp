@@ -8,24 +8,30 @@ import { CarLoader } from "./Loader";
 export function Connection() {
   const [isConnected, setIsConnected] = useState(false);
   const [noProviders, setNoProviders] = useState();
+
   const [account, setAccount] = useState("");
   const navigate = useNavigate();
-  const navigateToProfile = (account) => {
+  const [alreadyExists, setAlreadyExists] = useState(false);
+
+  const navigateToProfile = async (account) => {
     console.log("account " + account);
-    setTimeout(() => navigate(`/profile/${account}`), 2000);
+    try {
+      const resp = await fetch("http://localhost:4000/checkUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({account}),
+      });
+      if (resp.ok) {
+        navigate(`/profile/${account}/ride-page`);
+      } else {
+        setTimeout(() => navigate(`/profile/${account}`), 2000);
+      }
+    } catch (ERR) {
+      console.log(ERR);
+    }
   };
-  // useEffect(() => {
-  //   if (window.ethereum) {
-  //     ethereum.request({ method: "eth_accounts" }).then((accounts) => {
-  //       if (accounts.length > 0) {
-  //         const account = accounts[0];
-  //         setAccount(account);
-  //         setIsConnected(true);
-  //         navigateToProfile(account)
-  //       }
-  //     });
-  //   }
-  // }, []);
 
   const detectCurrentProvider = () => {
     let provider;
@@ -48,10 +54,10 @@ export function Connection() {
         const web3 = new Web3(currentProvider);
         const userAcc = await web3.eth.getAccounts();
         const account = userAcc[0];
+        await navigateToProfile(account);
         setAccount(account);
         setIsConnected(true);
         setNoProviders(false);
-        navigateToProfile(account);
       } else {
         setNoProviders(true);
       }
@@ -99,7 +105,8 @@ export function Connection() {
             <br />
           </>
         )}
-        <br/><br/>
+        <br />
+        <br />
         {noProviders && (
           <>
             <center>
