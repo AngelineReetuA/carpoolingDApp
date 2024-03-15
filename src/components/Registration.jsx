@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Forms.css";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 export function Registration() {
   const navigate = useNavigate();
@@ -54,10 +55,10 @@ export function Registration() {
         body: formData,
       });
       if (resp.ok) {
-        alert("Registered successfully");
+        swal("Success","You are regsitered successfully","success")
         navigate(`/profile/${mmID}/ride-page`);
       } else {
-        alert("Registration failed");
+        swal("Error","We have encountered an error","error")
       }
     } catch (error) {}
   }
