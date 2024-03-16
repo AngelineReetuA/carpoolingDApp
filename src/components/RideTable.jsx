@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 export function RideTable() {
-  const container = document.getElementsByClassName("container");
-  const table = document.getElementById("table");
+  const loc = window.location.href;
+  const parts = loc.split("/");
+  const metamaskAddress = parts[parts.length - 2];
 
   const [rides, setRides] = useState();
   useEffect(() => {
@@ -28,6 +29,22 @@ export function RideTable() {
     fetchRides();
   }, []);
 
+  async function join(ID, metamaskAddress) {
+    console.log("ID:", ID);
+    const resp = await fetch("http://localhost:4000/update-ride-details", {
+      method: "POST",
+      body: JSON.stringify({ID, metamaskAddress}),
+      headers:{
+      "content-type":"application/json"
+      }
+    });
+    if(resp.ok){
+      swal("Ride successfully joined","Head on to the My Rides page to view your rides","success")
+    } else {
+      swal("Error","Internal server error","error")
+    }
+  }
+
   return (
     <center>
       <div className="container">
@@ -37,7 +54,8 @@ export function RideTable() {
         <ul className="responsive-table" id="table">
           <li className="table-header">
             <div className="col col-3">Ride Id</div>
-            <div className="col col-3">Time & Date</div>
+            <div className="col col-3">Date</div>
+            <div className="col col-3">Time</div>
             <div className="col col-3">Starting Area</div>
             <div className="col col-3">Via</div>
             <div className="col col-3">Destination</div>
@@ -48,6 +66,7 @@ export function RideTable() {
           {rides?.map((ride) => (
             <li className="table-row" key={ride.ID}>
               <div className="col col-3">{ride.ID}</div>
+              <div className="col col-3">{ride.On}</div>
               <div className="col col-3">{ride.StartingTime}</div>
               <div className="col col-3">{ride.StartingPoint}</div>
               <div className="col col-3">{ride.Via}</div>
@@ -57,7 +76,9 @@ export function RideTable() {
                 {ride.DriverUName}, {ride.DriverPhone}
               </div>
               <div className="col col-3">
-                <button className="button">Join</button>
+                <button className="button" onClick={() => join(ride.ID, metamaskAddress)}>
+                  Join
+                </button>
               </div>
             </li>
           ))}
