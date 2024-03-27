@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import swal from "sweetalert";
 import Web3 from "web3";
-import fs from "fs";
-import contractAbi from "../../tagjsonABI.json";
+import { CarLoader } from "./Loader";
 
 export function MyRides() {
+  const [loading, setLoading] = useState(true);
   const [rides, setRides] = useState([]);
   const loc = window.location.href;
   const parts = loc.split("/");
@@ -36,10 +36,11 @@ export function MyRides() {
               if (uname === metamaskAddress) {
                 console.log("true");
                 setRides([...rides, ride]);
-                console.log(rides);
+                setLoading(false);
               }
             }
           }
+          setLoading(false);
         } else {
           console.error("Failed to fetch rides:", response.statusText);
         }
@@ -119,37 +120,44 @@ export function MyRides() {
   }
   return (
     <center>
-      <div className="container">
-        <h2 className="rideTableHeading">Rides you have joined</h2>
-        <ul className="responsive-table">
-          <li className="table-header">
-            <div className="col col-3">Date</div>
-            <div className="col col-2">Time</div>
-            <div className="col col-2">Starting Area</div>
-            <div className="col col-3">Via</div>
-            <div className="col col-3">Destination</div>
-            <div className="col col-3">Contact</div>
-            <div className="col col-3"></div>
-          </li>
-          {rides?.map((ride) => (
-            <li className="table-row" key={ride.ID}>
-              <div className="col col-3">{ride.On}</div>
-              <div className="col col-2">{ride.StartingTime}</div>
-              <div className="col col-2">{ride.StartingPoint}</div>
-              <div className="col col-3">{ride.Via}</div>
-              <div className="col col-3">{ride.EndingPoint}</div>
-              <div className="col col-3">
-                {ride.DriverUName}, {ride.DriverPhone}
-              </div>
-              <div className="col col-3">
-                <button className="button" onClick={() => done(ride.DriverID)}>
-                  Transfer Tokens
-                </button>
-              </div>
+      {loading ? (
+        <CarLoader />
+      ) : (
+        <div className="container">
+          <h2 className="rideTableHeading">Rides you have joined</h2>
+          <ul className="responsive-table">
+            <li className="table-header">
+              <div className="col col-3">Date</div>
+              <div className="col col-2">Time</div>
+              <div className="col col-2">Starting Area</div>
+              <div className="col col-3">Via</div>
+              <div className="col col-3">Destination</div>
+              <div className="col col-3">Contact</div>
+              <div className="col col-3"></div>
             </li>
-          ))}
-        </ul>
-      </div>
+            {rides?.map((ride) => (
+              <li className="table-row" key={ride.ID}>
+                <div className="col col-3">{ride.On}</div>
+                <div className="col col-2">{ride.StartingTime}</div>
+                <div className="col col-2">{ride.StartingPoint}</div>
+                <div className="col col-3">{ride.Via}</div>
+                <div className="col col-3">{ride.EndingPoint}</div>
+                <div className="col col-3">
+                  {ride.DriverUName}, {ride.DriverPhone}
+                </div>
+                <div className="col col-3">
+                  <button
+                    className="button"
+                    onClick={() => done(ride.DriverID)}
+                  >
+                    Transfer Tokens
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </center>
   );
 }
