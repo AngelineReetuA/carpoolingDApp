@@ -88,7 +88,7 @@ export function MyRides() {
               contractAddress
             );
 
-            const toAddress = "0x1234567890123456789012345678901234567890"; // Replace with the receiver's address
+            const toAddress = "0x6f0E710B76f00dA026Fa720cf2E8863B144d487a"; // Replace with the receiver's address
             const amount = "100000000000000000000"; // Replace with the amount of tokens to transfer
 
             try {
@@ -157,7 +157,7 @@ export function MyRides() {
                       className="button"
                       onClick={() => done(ride.DriverID)}
                     >
-                      Transfer Tokens
+                      Send Tokens
                     </button>
                   </div>
                 </li>
