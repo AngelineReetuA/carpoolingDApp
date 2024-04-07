@@ -19,8 +19,22 @@ export function RideTable() {
           ridesData.sort(
             (a, b) => new Date(a.StartingTime) - new Date(b.StartingTime)
           );
+          let i;
+          for (i = 0; i < ridesData.length; i++) {
+            if ((ridesData[i].Carpoolers = "0")) {
+              console.log("ride has 0 carpoolers", ridesData.Carpoolers);
+              ridesData.splice(0, 1);
+            }
+          }
+          if (ridesData.length === 0) {
+            console.log("rides do not exist");
+            setExists(false);
+          }
+          console.log("ridesData", ridesData);
           setRides(ridesData);
-          if (rides===null) {
+          console.log("rides", rides);
+          if (rides === undefined) {
+            console.log("rides do not exist");
             setExists(false);
           } else {
             setExists(true);

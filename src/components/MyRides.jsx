@@ -6,7 +6,7 @@ import Web3 from "web3";
 import { CarLoader } from "./Loader";
 
 export function MyRides() {
-  const [exists, setExists] = useState(false);
+  const [exists, setExists] = useState();
   const [loading, setLoading] = useState(true);
   const [rides, setRides] = useState([]);
   const loc = window.location.href;
