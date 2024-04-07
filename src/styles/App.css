@@ -71,7 +71,7 @@
   fill: #181717;
 }
 
-input[type="text"],
+input[type="text"]
 select {
   width: 35%;
   padding: 12px 20px;
