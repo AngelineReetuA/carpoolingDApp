@@ -128,8 +128,6 @@ export function Registration() {
                   <input
                     type="text"
                     name="bloodGroup"
-                    placeholder="Your blood group (O+|0-|A+|A-|B+|B-)"
-                    pattern="O+|O-|A+|A-|B+|B-"
                     required
                   />
                 </td>

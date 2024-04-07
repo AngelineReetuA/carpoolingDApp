@@ -51,7 +51,13 @@ export function PostRide() {
                     <label>Date</label>
                   </td>
                   <td>
-                    <input type="date" name="date" />
+                    <input
+                      type="date"
+                      name="date"
+                      pattern="\d{2}-\d{2}-\d{4}"
+                      placeholder="MM-DD-YYYY"
+                      required
+                    />
                   </td>
                 </tr>
                 <tr>
@@ -59,7 +65,13 @@ export function PostRide() {
                     <label>Start Time</label>
                   </td>
                   <td>
-                    <input type="text" name="startTime" placeholder="Time" />
+                    <input
+                      type="text"
+                      name="startTime"
+                      pattern="(1[0-2]|0?[1-9]):[0-5][0-9] (AM|PM)"
+                      placeholder="Please enter a valid time in the format HH:MM AM/PM"
+                      required
+                    />
                   </td>
                 </tr>
                 <tr>
@@ -71,6 +83,7 @@ export function PostRide() {
                       type="text"
                       name="startArea"
                       placeholder="Starting area"
+                      required
                     />
                   </td>
                 </tr>
@@ -79,7 +92,7 @@ export function PostRide() {
                     <label>Via</label>
                   </td>
                   <td>
-                    <input type="text" name="via" placeholder="Via" />
+                    <input type="text" name="via" placeholder="Via" required />
                   </td>
                 </tr>
                 <tr>
@@ -87,7 +100,12 @@ export function PostRide() {
                     <label>Destination</label>
                   </td>
                   <td>
-                    <input type="text" name="dest" placeholder="Destination" />
+                    <input
+                      type="text"
+                      name="dest"
+                      placeholder="Destination"
+                      required
+                    />
                   </td>
                 </tr>
                 <tr>
@@ -95,7 +113,7 @@ export function PostRide() {
                     <label>Tag along - ers</label>
                   </td>
                   <td>
-                    <input type="number" name="taggers" />
+                    <input type="number" name="taggers" required />
                   </td>
                 </tr>
               </tbody>
