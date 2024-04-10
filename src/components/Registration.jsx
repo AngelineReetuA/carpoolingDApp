@@ -79,6 +79,8 @@ export function Registration() {
                     type="text"
                     name="uName"
                     placeholder="Your app username.."
+                    pattern="[^\s]+"
+                    required
                   />
                 </td>
               </tr>
@@ -87,7 +89,7 @@ export function Registration() {
                   <label>Name</label>
                 </td>
                 <td>
-                  <input type="text" name="name" placeholder="Your name.." />
+                  <input type="text" name="name" placeholder="Your name.." pattern="[A-Za-z ]{1,}" required/>
                 </td>
               </tr>
               <tr>
@@ -99,6 +101,8 @@ export function Registration() {
                     type="text"
                     name="address"
                     placeholder="Your current address.."
+                    pattern="[A-Za-z ]{1,}"
+                    required
                   />
                 </td>
               </tr>
@@ -111,6 +115,8 @@ export function Registration() {
                     type="text"
                     name="phno"
                     placeholder="Your phone number.."
+                    pattern="[0-9]{10}"
+                    required
                   />
                 </td>
               </tr>
@@ -122,7 +128,7 @@ export function Registration() {
                   <input
                     type="text"
                     name="bloodGroup"
-                    placeholder="Your blood group.."
+                    required
                   />
                 </td>
               </tr>
@@ -135,6 +141,8 @@ export function Registration() {
                     type="text"
                     name="emerCon"
                     placeholder="Your emergency contact number.."
+                    pattern="[0-9]{10}"
+                    required
                   />
                 </td>
               </tr>
@@ -146,7 +154,9 @@ export function Registration() {
                   <input
                     type="text"
                     name="dlno"
-                    placeholder="Your DL Number.."
+                    placeholder="Your DL Number (AA-12-1234-1234567)"
+                    pattern="[A-Z]{2}-\d{2}-\d{4}-\d{7}"
+                    required
                   />
                 </td>
               </tr>
@@ -155,7 +165,7 @@ export function Registration() {
                   <label>Driver's License</label>
                 </td>
                 <td>
-                  <input type="file" accept=".png" name="dl" />
+                  <input type="file" accept=".png" name="dl" required/>
                 </td>
               </tr>
             </tbody>

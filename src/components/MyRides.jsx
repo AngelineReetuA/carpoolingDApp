@@ -6,6 +6,7 @@ import Web3 from "web3";
 import { CarLoader } from "./Loader";
 
 export function MyRides() {
+  const [exists, setExists] = useState();
   const [loading, setLoading] = useState(true);
   const [rides, setRides] = useState([]);
   const loc = window.location.href;
@@ -36,6 +37,11 @@ export function MyRides() {
               if (uname === metamaskAddress) {
                 console.log("true");
                 setRides([...rides, ride]);
+                if (rides===null) {
+                  setExists(false);
+                } else {
+                  setExists(true);
+                }
                 setLoading(false);
               }
             }
@@ -82,7 +88,7 @@ export function MyRides() {
               contractAddress
             );
 
-            const toAddress = "0x1234567890123456789012345678901234567890"; // Replace with the receiver's address
+            const toAddress = "0x6f0E710B76f00dA026Fa720cf2E8863B144d487a"; // Replace with the receiver's address
             const amount = "100000000000000000000"; // Replace with the amount of tokens to transfer
 
             try {
@@ -120,43 +126,47 @@ export function MyRides() {
   }
   return (
     <center>
-      {loading ? (
-        <CarLoader />
-      ) : (
-        <div className="container">
-          <h2 className="rideTableHeading">Rides you have joined</h2>
-          <ul className="responsive-table">
-            <li className="table-header">
-              <div className="col col-3">Date</div>
-              <div className="col col-2">Time</div>
-              <div className="col col-2">Starting Area</div>
-              <div className="col col-3">Via</div>
-              <div className="col col-3">Destination</div>
-              <div className="col col-3">Contact</div>
-              <div className="col col-3"></div>
-            </li>
-            {rides?.map((ride) => (
-              <li className="table-row" key={ride.ID}>
-                <div className="col col-3">{ride.On}</div>
-                <div className="col col-2">{ride.StartingTime}</div>
-                <div className="col col-2">{ride.StartingPoint}</div>
-                <div className="col col-3">{ride.Via}</div>
-                <div className="col col-3">{ride.EndingPoint}</div>
-                <div className="col col-3">
-                  {ride.DriverUName}, {ride.DriverPhone}
-                </div>
-                <div className="col col-3">
-                  <button
-                    className="button"
-                    onClick={() => done(ride.DriverID)}
-                  >
-                    Transfer Tokens
-                  </button>
-                </div>
+      {exists ? (
+        loading ? (
+          <CarLoader />
+        ) : (
+          <div className="container">
+            <h2 className="rideTableHeading">Rides you have joined</h2>
+            <ul className="responsive-table">
+              <li className="table-header">
+                <div className="col col-3">Date</div>
+                <div className="col col-2">Time</div>
+                <div className="col col-2">Starting Area</div>
+                <div className="col col-3">Via</div>
+                <div className="col col-3">Destination</div>
+                <div className="col col-3">Contact</div>
+                <div className="col col-3"></div>
               </li>
-            ))}
-          </ul>
-        </div>
+              {rides?.map((ride) => (
+                <li className="table-row" key={ride.ID}>
+                  <div className="col col-3">{ride.On}</div>
+                  <div className="col col-2">{ride.StartingTime}</div>
+                  <div className="col col-2">{ride.StartingPoint}</div>
+                  <div className="col col-3">{ride.Via}</div>
+                  <div className="col col-3">{ride.EndingPoint}</div>
+                  <div className="col col-3">
+                    {ride.DriverUName}, {ride.DriverPhone}
+                  </div>
+                  <div className="col col-3">
+                    <button
+                      className="button"
+                      onClick={() => done(ride.DriverID)}
+                    >
+                      Send Tokens
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      ) : (
+        <h4 className="rideTableHeading">You have not joined any rides yet</h4>
       )}
     </center>
   );

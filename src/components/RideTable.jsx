@@ -7,7 +7,7 @@ export function RideTable() {
   const loc = window.location.href;
   const parts = loc.split("/");
   const metamaskAddress = parts[parts.length - 2];
-
+  const [exists, setExists] = useState();
   const [loading, setLoading] = useState(true);
   const [rides, setRides] = useState();
   useEffect(() => {
@@ -19,7 +19,13 @@ export function RideTable() {
           ridesData.sort(
             (a, b) => new Date(a.StartingTime) - new Date(b.StartingTime)
           );
+         
+          console.log("ridesData", ridesData);
           setRides(ridesData);
+          setExists(true)
+          console.log("rides", rides);
+
+      
         } else {
           console.error("Failed to fetch rides:", response.statusText);
         }
@@ -59,46 +65,50 @@ export function RideTable() {
         <h2 className="rideTableHeading">
           Upcoming Rides for you to Tag Along
         </h2>
-        {loading ? (
-          <div>
-            <CarLoader />
-          </div>
-        ) : (
-          <ul className="responsive-table" id="table">
-            <li className="table-header">
-              <div className="col col-3">Ride Id</div>
-              <div className="col col-3">Date</div>
-              <div className="col col-3">Time</div>
-              <div className="col col-3">Starting Area</div>
-              <div className="col col-3">Via</div>
-              <div className="col col-3">Destination</div>
-              <div className="col col-3">Carpoolers pending</div>
-              <div className="col col-3">Contact</div>
-              <div className="col col-3">Join</div>
-            </li>
-            {rides?.map((ride) => (
-              <li className="table-row" key={ride.ID}>
-                <div className="col col-3">{ride.ID}</div>
-                <div className="col col-3">{ride.On}</div>
-                <div className="col col-3">{ride.StartingTime}</div>
-                <div className="col col-3">{ride.StartingPoint}</div>
-                <div className="col col-3">{ride.Via}</div>
-                <div className="col col-3">{ride.EndingPoint}</div>
-                <div className="col col-3">{ride.Carpoolers}</div>
-                <div className="col col-3">
-                  {ride.DriverUName}, {ride.DriverPhone}
-                </div>
-                <div className="col col-3">
-                  <button
-                    className="button"
-                    onClick={() => join(ride.ID, metamaskAddress)}
-                  >
-                    Join
-                  </button>
-                </div>
+        {exists ? (
+          loading ? (
+            <div>
+              <CarLoader />
+            </div>
+          ) : (
+            <ul className="responsive-table" id="table">
+              <li className="table-header">
+                <div className="col col-3">Ride Id</div>
+                <div className="col col-3">Date</div>
+                <div className="col col-3">Time</div>
+                <div className="col col-3">Starting Area</div>
+                <div className="col col-3">Via</div>
+                <div className="col col-3">Destination</div>
+                <div className="col col-3">Carpoolers pending</div>
+                <div className="col col-3">Contact</div>
+                <div className="col col-3">Join</div>
               </li>
-            ))}
-          </ul>
+              {rides?.map((ride) => (
+                <li className="table-row" key={ride.ID}>
+                  <div className="col col-3">{ride.ID}</div>
+                  <div className="col col-3">{ride.On}</div>
+                  <div className="col col-3">{ride.StartingTime}</div>
+                  <div className="col col-3">{ride.StartingPoint}</div>
+                  <div className="col col-3">{ride.Via}</div>
+                  <div className="col col-3">{ride.EndingPoint}</div>
+                  <div className="col col-3">{ride.Carpoolers}</div>
+                  <div className="col col-3">
+                    {ride.DriverUName}, {ride.DriverPhone}
+                  </div>
+                  <div className="col col-3">
+                    <button
+                      className="button"
+                      onClick={() => join(ride.ID, metamaskAddress)}
+                    >
+                      Join
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )
+        ) : (
+          <h4 className="rideTableHeading">Uh oh.. No rides at the moment..</h4>
         )}
       </div>
     </center>

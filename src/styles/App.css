@@ -71,8 +71,32 @@
   fill: #181717;
 }
 
-input[type="text"],
+input[type="text"]
 select {
+  width: 35%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type="date"]{
+  width: 35%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type="number"]{
+  width: 35%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type="date"]{
   width: 35%;
   padding: 12px 20px;
   display: inline-block;
