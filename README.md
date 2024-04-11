@@ -11,5 +11,6 @@ Tag Along is an incentive based carpooling DApp which promotes an innovative sol
 - Metamask for Non - fungible tokens and incentives sharing
 
 ## Working of the application
-![Video](https://github.com/AngelineReetuA/carpoolingDApp/blob/master/workingOfTheApp.mp4)
+
+https://github.com/AngelineReetuA/carpoolingDApp/assets/110884356/00f8b6b4-600a-470d-9d73-cb5f5849fd6b
 
