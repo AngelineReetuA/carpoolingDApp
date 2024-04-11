@@ -9,3 +9,5 @@ Tag Along is an incentive based carpooling DApp which promotes an innovative sol
 - Interplanetary File System for file storage
 - Express JS and React JS for the frontend
 - Metamask for Non - fungible tokens and incentives sharing
+
+/home/angeline-reetu/Downloads/workingOfTheApp.mp4
