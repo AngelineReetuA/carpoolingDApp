@@ -10,4 +10,6 @@ Tag Along is an incentive based carpooling DApp which promotes an innovative sol
 - Express JS and React JS for the frontend
 - Metamask for Non - fungible tokens and incentives sharing
 
+## Working of the application
+![Video](https://github.com/AngelineReetuA/carpoolingDApp/blob/master/workingOfTheApp.mp4)
 
