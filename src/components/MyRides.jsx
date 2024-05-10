@@ -70,8 +70,8 @@ export function MyRides() {
       ethereum
         .request({ method: "eth_requestAccounts" })
         .then(async function (accounts) {
-          const fromAddress = accounts[0]; // Get the current Metamask account
-          const contractAddress = "0xd1360f6b69ac0a20e48c08f97b97eba984868d2e"; // Replace with your contract address
+          const fromAddress = accounts[0]; 
+          const contractAddress = "0xd1360f6b69ac0a20e48c08f97b97eba984868d2e";
 
           try {
             // Fetch contract ABI from URL
